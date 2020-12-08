@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "user_registration";
+option java_outer_classname = "UserRegistrationProto";
+
+package user_registration;
+
+import "google/protobuf/wrappers.proto";
+
+service UserRegistration {
+  rpc RegisterUser (User) returns (google.protobuf.BoolValue);
+  rpc GetUserInfo (google.protobuf.StringValue) returns (User);
+  rpc SetUserCustomClaim(google.protobuf.StringValue) returns (google.protobuf.BoolValue);
+  rpc IsUserAdmin(google.protobuf.StringValue) returns (google.protobuf.BoolValue);
+  rpc CreateCustomToken(google.protobuf.StringValue) returns (google.protobuf.StringValue);
+  rpc VerifyIdToken(google.protobuf.StringValue) returns (google.protobuf.StringValue);
+}
+
+message User {
+  string id = 1;
+  string firstName = 2;
+  string lastName = 3;
+  string email = 4;
+  string password = 5;
+  int64  mobileNumber = 6;
+  string preferences = 7;
+  string address = 8;
+  Location location = 10;
+}
+
+message Location {
+  int32 latitude = 1;
+  int32 longitude = 2;
+}
